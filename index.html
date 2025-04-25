@@ -179,14 +179,12 @@
         .hamburguer.open {
           position: fixed;
           /* Fixa o X no topo da página quando o menu está aberto */
-          top: 59px;
-          /* Ajuste conforme necessário */
-          right: 40px;
-          /* Ajuste conforme necessário */
+          top: 36px;
+          right: 32px;
         }
 
         .hamburguer.open span {
-          background-color: #004aad;
+          background-color: #fff;
         }
 
         /* Animação do ícone de hambúrguer */
@@ -209,22 +207,22 @@
         .navegacao ul li a {
           font-size: 18px;
           padding: 8px 0;
-          color: #004aad;
+          color: #fff;
           display: inline-block;
           text-align: center;
         }
 
         .navegacao ul li a.botao-baixar {
           margin-top: 32px;
-          color: #fff;
-          background-color: #004bad;
+          color: #007f0e;
+          background-color: #fff;
         }
       }
 
       /* Main */
 
       .hero {
-        background: url(images/bg2.png) no-repeat;
+        background: url(images/bg.png) no-repeat;
         background-size: cover;
       }
 
@@ -370,6 +368,70 @@
         text-align: center;
         padding: 12px 0;
       }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 80%;
+        }
+
+        h1,
+        h2 {
+          font-size: 40px;
+        }
+
+        .hero .container {
+          padding: 40px 0;
+          gap: 40px;
+        }
+
+        .hero-left {
+          gap: 32px;
+        }
+
+        .app-stores {
+          align-items: center;
+          justify-content: center;
+        }
+
+        .app-stores img,
+        #cat .app-stores img {
+          width: 100%;
+        }
+
+        .hero-right img {
+          width: 100%;
+          margin-right: 0;
+        }
+
+        #o-que-e .container {
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .o-que-e-right img {
+          height: 350px;
+        }
+
+        .title-margins {
+          margin: 32px 0 16px;
+        }
+
+        .small-title {
+          font-size: 24px;
+        }
+
+        #cat {
+          padding: 40px 0;
+        }
+
+        #cat .app-stores {
+          gap: 32px;
+        }
+
+        footer {
+          font-size: 12px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -484,5 +546,15 @@
     <footer>
       <span>© 2025 "BoraJogar?". Todos os direitos reservados.</span>
     </footer>
+
+    <script>
+      const hamburguer = document.getElementById("hamburguer");
+      const navegacao = document.querySelector(".navegacao");
+
+      hamburguer.addEventListener("click", () => {
+        navegacao.classList.toggle("active");
+        hamburguer.classList.toggle("open");
+      });
+    </script>
   </body>
 </html>
