@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bora Jogar? - Sorteador de Times</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
+        text-decoration: none;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      h1,
+      h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 80px;
+        color: #fff;
+        letter-spacing: 4px;
+        text-shadow: -1px -1px 11px rgba(0, 0, 0, 0.396);
+      }
+
+      h3 {
+        color: #fff;
+      }
+
+      body {
+        background-color: #007f0e;
+      }
+
+      /* Containers */
+
+      .container {
+        max-width: 1280px;
+        width: 100%;
+      }
+
+      .centralize {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Menu */
+
+      header {
+        background-color: #fff;
+      }
+
+      .menu .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px 0;
+      }
+
+      #logo {
+        width: 200px;
+      }
+
+      .navegacao ul {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 32px;
+      }
+
+      .navegacao ul li a {
+        color: #fff;
+        text-transform: uppercase;
+        position: relative;
+        padding-bottom: 8px;
+        color: #007f0e;
+      }
+
+      .navegacao .botao-baixar {
+        background-color: #007f0e;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 500;
+        box-shadow: rgba(149, 165, 155, 0.486) 0px 8px 32px;
+        transition: 0.4s ease-in-out;
+      }
+
+      .navegacao .botao-baixar:hover {
+        background-color: #009a12;
+        box-shadow: rgba(26, 62, 32, 0.386) 0px 8px 24px;
+      }
+
+      /* Menu hambúrguer */
+
+      .hamburguer {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 24px;
+        cursor: pointer;
+        z-index: 999;
+        position: absolute;
+        /* Posição normal quando o menu está fechado */
+        top: 36px;
+        /* Ajuste conforme necessário */
+        right: 32px;
+        /* Ajuste conforme necessário */
+      }
+
+      .hamburguer span {
+        display: block;
+        height: 3px;
+        background-color: #007f0e;
+        border-radius: 2px;
+        transition: 0.3s ease-in-out;
+      }
+
+      /* Menu hambúrguer em resoluções menores */
+      @media (max-width: 768px) {
+        .plataforma {
+          padding-left: 32px;
+          padding-right: 32px;
+          padding-bottom: 24px;
+        }
+
+        .navegacao {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          height: 100%;
+          width: 65%;
+          background-color: #007f0e;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: 0.5s ease;
+          z-index: 999;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .navegacao ul {
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .navegacao.active {
+          right: 0;
+        }
+
+        .menu {
+          justify-content: space-between;
+          margin-left: 7%;
+        }
+
+        .hamburguer {
+          display: flex;
+        }
+
+        .hamburguer.open {
+          position: fixed;
+          /* Fixa o X no topo da página quando o menu está aberto */
+          top: 59px;
+          /* Ajuste conforme necessário */
+          right: 40px;
+          /* Ajuste conforme necessário */
+        }
+
+        .hamburguer.open span {
+          background-color: #004aad;
+        }
+
+        /* Animação do ícone de hambúrguer */
+        .hamburguer.open span:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburguer.open span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburguer.open span:nth-child(3) {
+          transform: translateY(-12px) rotate(-45deg);
+        }
+
+        .navegacao ul {
+          margin-top: 130px;
+        }
+
+        .navegacao ul li a {
+          font-size: 18px;
+          padding: 8px 0;
+          color: #004aad;
+          display: inline-block;
+          text-align: center;
+        }
+
+        .navegacao ul li a.botao-baixar {
+          margin-top: 32px;
+          color: #fff;
+          background-color: #004bad;
+        }
+      }
+
+      /* Main */
+
+      .hero {
+        background: url(images/bg2.png) no-repeat;
+        background-size: cover;
+      }
+
+      .hero .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        /* gap: 80px; */
+        padding: 80px 0;
+      }
+
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .app-stores {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        /* justify-content: center; */
+        gap: 24px;
+      }
+
+      .app-stores img {
+        width: 200px;
+      }
+
+      .hero-right img {
+        width: 300px;
+        margin-right: 80px;
+      }
+
+      /* O que é? */
+
+      #o-que-e {
+        background-color: #fff;
+        padding: 56px 0;
+      }
+
+      #o-que-e .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8%;
+      }
+
+      .o-que-e-left .cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 40px;
+        margin-top: 24px;
+      }
+
+      .o-que-e-left .cards .card {
+        width: 100%;
+        height: auto;
+        background-color: #fff;
+        border-radius: 16px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+
+      .o-que-e-left h2 {
+        color: #007f0e;
+        text-shadow: none;
+      }
+
+      .o-que-e-left .card-title {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background-color: #66bb6a;
+        padding: 12px;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .o-que-e-left .card-title h3 {
+        font-size: 24px;
+      }
+
+      .o-que-e-left .card-title .span-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background-color: #fff;
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+
+      .o-que-e-left .card-title span {
+        text-align: center;
+        color: #66bb6a;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .o-que-e-left .card p {
+        padding: 16px;
+      }
+
+      .o-que-e-right img {
+        height: 650px;
+      }
+
+      .title-margins {
+        margin: 40px 0 16px;
+      }
+
+      .small-title {
+        font-size: 40px;
+        /* color: #fff !important;
+        padding: 8px 16px 4px;
+        background-color: #007f0e; */
+      }
+
+      #cat {
+        padding: 80px 0;
+      }
+
+      #cat h2 {
+        text-align: center;
+        text-shadow: none;
+      }
+
+      #cat .app-stores {
+        margin-top: 56px;
+        gap: 64px;
+      }
+
+      #cat .app-stores img {
+        width: 300px;
+      }
+
+      footer {
+        background-color: #fff;
+        font-size: 14px;
+        color: #007f0e;
+        text-align: center;
+        padding: 12px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="menu centralize">
+        <div class="container">
+          <img src="images/logo_extended.png" alt="Logo PartiuFut" id="logo" />
+          <nav class="navegacao">
+            <ul>
+              <li><a href="#o-que-e">O que é?</a></li>
+              <li><a href="#como-funciona">Como funciona?</a></li>
+              <li><a href="#cat" class="botao-baixar">Baixar</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="hamburguer" id="hamburguer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="hero centralize">
+        <div class="container">
+          <div class="hero-left">
+            <h1>
+              Sorteio Inteligente, <br />
+              Jogo Equilibrado. <br />
+              E aí, Bora Jogar?
+            </h1>
+            <div class="app-stores">
+              <a href=""><img src="images/android.png" alt="Android" /></a>
+              <a href=""><img src="images/ios.png" alt="iOS" /></a>
+            </div>
+          </div>
+          <div class="hero-right">
+            <img src="images/mockup.png" alt="Celular" />
+          </div>
+        </div>
+      </section>
+      <section id="o-que-e" class="centralize">
+        <div class="container">
+          <div class="o-que-e-right">
+            <img src="images/resultado.png" alt="Screenshot" />
+          </div>
+          <div class="o-que-e-left">
+            <h2>O que é?</h2>
+            <p>
+              "Bora Jogar?" é a solução ideal para sortear times de futebol
+              entre amigos de forma rápida, justa e divertida. Cadastre seus
+              jogadores, avalie suas habilidades, defina os goleiros e deixe
+              nosso algoritmo inteligente criar times equilibrados em segundos.
+              Visualize a formação tática no campo e compartilhe a emoção do
+              sorteio com a galera!
+            </p>
+            <h2 id="como-funciona" class="title-margins small-title">
+              E como funciona? 🤔
+            </h2>
+            <div class="cards">
+              <div class="card">
+                <div class="card-title">
+                  <div class="span-container"><span>1</span></div>
+                  <h3>Cadastro de Jogadores</h3>
+                </div>
+                <p>
+                  Crie um elenco completo com todos os seus amigos e atribua
+                  notas a eles para um sorteio mais justo e equilibrado. Defina
+                  quem pode ou não jogar no gol.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">
+                  <div class="span-container"><span>2</span></div>
+                  <h3>Sorteio Balanceado</h3>
+                </div>
+                <p>
+                  Com apenas um toque, nosso algoritmo inteligente cria times
+                  com níveis de habilidade equivalentes. Veja a disposição dos
+                  jogadores no campo após o sorteio, facilitando a organização
+                  da partida.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">
+                  <div class="span-container"><span>3</span></div>
+                  <h3>Lista de Jogadores</h3>
+                </div>
+                <p>
+                  Compartilhe sua lista de jogadores com outros amigos através
+                  de um código único. Troque elencos entre celulares de forma
+                  rápida e fácil!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="cat" class="centralize">
+        <div class="container">
+          <h2>
+            Prepare a chuteira e convoque a galera! Baixe agora para Android ou
+            iOS.
+          </h2>
+          <div class="app-stores centralize">
+            <a href=""><img src="images/android.png" alt="Android" /></a>
+            <a href=""><img src="images/ios.png" alt="iOS" /></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>© 2025 "BoraJogar?". Todos os direitos reservados.</span>
+    </footer>
+  </body>
+</html>
